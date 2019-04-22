@@ -1,0 +1,16 @@
+
+stack install --fast
+
+stack install:: Shortcut for 'build --copy-bins' 
+--fast:: Turn off optimizations (-O0)
+
+
+aggiungere queste linee in stack.yaml
+
+extra-include-dirs:
+  - C:\Program Files\ZeroMQ 4.0.4\include
+
+extra-lib-dirs:
+  - C:\Program Files\ZeroMQ 4.0.4\lib
+
+risolve il problema, ma adesso manca System.Posix.IO
