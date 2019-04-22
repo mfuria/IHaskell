@@ -1,3 +1,8 @@
+## Build and Run
+# docker build . -t <name>
+# docker run --name ikask <name>
+
+# At least 6g of memory required
 FROM fpco/stack-build:lts-13.12
 
 # Install all necessary Ubuntu packages
@@ -8,7 +13,7 @@ RUN apt-get update && apt-get install -y python3-pip libgmp-dev libmagic-dev lib
 RUN pip3 install -U jupyter
 
 ENV LANG en_US.UTF-8
-ENV NB_USER jovyan
+ENV NB_USER ihaskell
 ENV NB_UID 1000
 ENV HOME /home/${NB_USER}
 
@@ -60,4 +65,6 @@ ENV PATH $(stack path --local-install-root)/bin:$(stack path --snapshot-install-
 RUN ihaskell install --stack
 WORKDIR ${HOME}
 RUN jupyter notebook --generate-config
-CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
+
+EXPOSE 8888
+CMD ["jupyter", "notebook", "--no-browser", "--ip", "0.0.0.0"]
